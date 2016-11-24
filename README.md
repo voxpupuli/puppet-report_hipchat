@@ -33,7 +33,7 @@ For the room in which you want to receive puppet notifications, add a new BYO In
 ### Installation utilizing puppet
 
 ```puppet
-class { 'puppet_hipchat':
+class { 'report_hipchat':
   server         => 'https://example.hipchat.com',
   api_version    => 'v2',
   api_key        => 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S',
@@ -46,7 +46,7 @@ class { 'puppet_hipchat':
 With puppetboard link: 
 
 ```puppet
-class { 'puppet_hipchat':
+class { 'report_hipchat':
   server         => 'https://example.hipchat.com',
   api_version    => 'v2',
   api_key        => 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S',
@@ -60,7 +60,7 @@ class { 'puppet_hipchat':
 With dashboard link:
 
 ```puppet
-class { 'puppet_hipchat':
+class { 'report_hipchat':
   server         => 'https://example.hipchat.com',
   api_version    => 'v2',
   api_key        => 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S',
@@ -74,7 +74,7 @@ class { 'puppet_hipchat':
 If you need to use a proxy to reach the hipchat server:
 
 ```puppet
-class { 'puppet_hipchat':
+class { 'report_hipchat':
   server         => 'https://example.hipchat.com',
   api_version    => 'v2',
   api_key        => 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S',
@@ -119,7 +119,7 @@ puppet-bundled gem library:
         $ sudo gem install hipchat
 
 
-2.  Install puppet-hipchat as a module in your Puppet master's module
+2.  Install report-hipchat as a module in your Puppet master's module
     path.
 
 3.  Update the `hipchat_server`, `hipchat_api_version`, `hipchat_api`, `hipchat_room` variables in the
@@ -173,7 +173,8 @@ Usage
   *NOTE FOR PUPPETBOARD 0.1.2+ USERS*: if you are using environments other than production
   you will need to either configure puppetboard default environment to * or set `hipchat_server`
   to append /%2A, ex: `:hipchat_server: http://hipchat.test.local/%2A` otherwise you will receive
-  a not found error for any nodes in environments other than `production`.
+  a not found error for any nodes in environments other than `production`. Alternitively you can set
+  puppetboard default environment to `*`.
 
 * To temporarily disable HipChat notifications add a file named
   `hipchat_disabled` in the same path as `hipchat.yaml`. Removing it

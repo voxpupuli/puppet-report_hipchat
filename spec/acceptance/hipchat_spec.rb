@@ -22,7 +22,7 @@ describe 'puppet-hipchat' do
         ip => '127.0.0.1',
       }
       EOS
-      apply_manifest(pp, :catch_failures => true)
+      apply_manifest(pp, catch_failures: true)
 
       # Now run the module
       pp = <<-EOS
@@ -45,7 +45,7 @@ describe 'puppet-hipchat' do
         value   => 'hipchat',
         notify  => Service['puppetserver'],
       }
-      class {'::puppet_hipchat': 
+      class {'::report_hipchat':
         api_key        => 'mykey',
         room           => 'myroom',
         statuses       => ['all', 'testing'],
@@ -55,15 +55,15 @@ describe 'puppet-hipchat' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
+      apply_manifest(pp, catch_failures: true)
 
-      # run the agent, this will cause the reporting handler generate a tmp file 
+      # run the agent, this will cause the reporting handler generate a tmp file
       # to show it executed properly
       agent = only_host_with_role(hosts, 'agent')
       expect(run_agent_on(agent).exit_code).to be_zero
 
       # validate idempotence
-      expect(apply_manifest(pp, :catch_failures => true).exit_code).to be_zero
+      expect(apply_manifest(pp, catch_failures: true).exit_code).to be_zero
     end
 
     describe file('/tmp/hipchat-notified.txt') do

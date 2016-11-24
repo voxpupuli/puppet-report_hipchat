@@ -1,8 +1,8 @@
-# Class: puppet_hipchat::params
+# Class: report_hipchat::params
 #
 # Parameterize for Puppet platform.
 #
-class puppet_hipchat::params {
+class report_hipchat::params {
 
   $package_name = 'hipchat'
   $puppetboard  = undef
@@ -19,6 +19,7 @@ class puppet_hipchat::params {
   } elsif ($::puppetversion) and (versioncmp('4.0.0', $::puppetversion) < 1) {
     $puppetconf_path = '/etc/puppetlabs/puppet'
     $install_hc_gem  = false
+    $provider        = undef
     $owner           = 'puppet'
     $group           = 'puppet'
   } else {
