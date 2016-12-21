@@ -1,9 +1,9 @@
 # Puppet Hipchat
 
-[![Puppet Forge](http://img.shields.io/puppetforge/v/jamtur01/puppet_hipchat.svg)](https://forge.puppetlabs.com/jamtur01/puppet_hipchat)
-[![Puppet Forge downloads](https://img.shields.io/puppetforge/dt/jamtur01/puppet_hipchat.svg)](https://forge.puppetlabs.com/jamtur01/puppet_hipchat)
-[![Puppet Forge score](https://img.shields.io/puppetforge/f/jamtur01/puppet_hipchat.svg)](https://forge.puppetlabs.com/jamtur01/puppet_hipchat)
-[![Build Status](https://travis-ci.org/jamtur01/puppet-hipchat.svg?branch=master)](https://travis-ci.org/jamtur01/puppet-hipchat)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/puppet/puppet-report_hipchat.svg)](https://forge.puppetlabs.com/puppet/puppet_hipchat)
+[![Puppet Forge downloads](https://img.shields.io/puppetforge/dt/puppet/puppet-report_hipchat.svg)](https://forge.puppetlabs.com/puppet/puppet-report_hipchat)
+[![Puppet Forge score](https://img.shields.io/puppetforge/f/puppet/puppet-report_hipchat.svg)](https://forge.puppetlabs.com/puppet/puppet-report_hipchat)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-report_hipchat.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-report_hipchat)
 
 
 ## Description
@@ -12,7 +12,7 @@ A Puppet report handler for sending notifications of Puppet runs to [HipChat](ht
 
 ## TravisCI status
 
-[![Build Status](https://travis-ci.org/jamtur01/puppet-hipchat.svg?branch=master)](https://travis-ci.org/jamtur01/puppet-hipchat)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-report_hipchat.svg?branch=master)](https://travis-ci.org/jamtur01/puppet-hipchat)
 
 ## Requirements
 
