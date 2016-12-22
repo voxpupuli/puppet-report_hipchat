@@ -1,12 +1,12 @@
 {
-  "name": "jamtur01-hipchat",
-  "version": "0.6.0",
-  "author": "James Turnbull <james@lovedthanlost.net>",
+  "name": "puppet-report_hipchat",
+  "version": "1.0.0",
+  "author": "Vox Pupuli",
   "license": "Apache-2.0",
   "summary": "A Puppet report handler for sending notifications of failed runs to HipChat",
-  "source": "https://github.com/jamtur01/puppet-hipchat",
-  "project_page": "https://github.com/jamtur01/puppet-hipchat",
-  "issues_url": "https://github.com/jamtur01/puppet-hipchat/issues",
+  "source": "https://github.com/voxpupuli/puppet-report_hipchat",
+  "project_page": "https://github.com/voxpupuli/puppet-report_hipchat",
+  "issues_url": "https://github.com/voxpupuli/puppet-hipchat/issues",
   "tags": ["hipchat", "notifications", "report"],
   "operatingsystem_support": [
     { "operatingsystem": "CentOS", "operatingsystemrelease": [ "6", "7" ] },
