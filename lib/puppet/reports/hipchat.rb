@@ -66,6 +66,7 @@ Puppet::Reports.register_report(:hipchat) do
     end
   end
 
+  # rubocop:disable Style/RedundantSelf
   def process
     # Disabled check here to ensure it is checked for every report
     return if File.exist?(DISABLED_FILE)
@@ -87,4 +88,5 @@ Puppet::Reports.register_report(:hipchat) do
       client[HIPCHAT_ROOM].send('Puppet', msg, notify: HIPCHAT_NOTIFY, color: color(self.status), message_format: 'text')
     end
   end
+  # rubocop:enable Style/RedundantSelf
 end
