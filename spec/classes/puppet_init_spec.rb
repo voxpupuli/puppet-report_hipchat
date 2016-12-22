@@ -16,15 +16,16 @@ describe 'report_hipchat' do
         server:  'myserver'
       }
     end
-    it { should contain_class('report_hipchat') }
-    it { should contain_package('hipchat').with(provider: 'gem') }
-    it { should contain_file('/etc/puppet/hipchat.yaml').with_content(/:hipchat_api: mykey/) }
-    it { should contain_file('/etc/puppet/hipchat.yaml').with_content(/:hipchat_room: myroom/) }
-    it { should contain_file('/etc/puppet/hipchat.yaml').with_content(/:hipchat_server: myserver/) }
-    it { should contain_file('/etc/puppet/hipchat.yaml').with_content(/:hipchat_api_version: v1\n/) }
-    it { should contain_file('/etc/puppet/hipchat.yaml').without_content(/:hipchat_proxy:/) }
-    it { should contain_file('/etc/puppet/hipchat.yaml').without_content(/:hipchat_puppetboard:/) }
-    it { should contain_file('/etc/puppet/hipchat.yaml').without_content(/:hipchat_dashboard:/) }
+    it { is_expected.to contain_class('report_hipchat') }
+    it { is_expected.to contain_class('report_hipchat::params') }
+    it { is_expected.to contain_package('hipchat').with(provider: 'gem') }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').with_content(%r{:hipchat_api: mykey}) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').with_content(%r{:hipchat_room: myroom}) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').with_content(%r{:hipchat_server: myserver}) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').with_content(%r{:hipchat_api_version: v1\n}) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').without_content(%r{:hipchat_proxy:}) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').without_content(%r{:hipchat_puppetboard:}) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').without_content(%r{:hipchat_dashboard:}) }
   end
 
   describe 'use api version 2' do
@@ -36,7 +37,7 @@ describe 'report_hipchat' do
         api_version: 'v2'
       }
     end
-    it { should contain_file('/etc/puppet/hipchat.yaml').with_content(/:hipchat_api_version: v2/) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').with_content(%r{:hipchat_api_version: v2}) }
   end
 
   describe 'specify file location' do
@@ -47,7 +48,7 @@ describe 'report_hipchat' do
         config_file: '/tmp/foo'
       }
     end
-    it { should contain_file('/tmp/foo') }
+    it { is_expected.to contain_file('/tmp/foo') }
   end
 
   describe 'no hipchat gem' do
@@ -58,7 +59,7 @@ describe 'report_hipchat' do
         install_hc_gem: false
       }
     end
-    it { should_not contain_package('hipchat') }
+    it { is_expected.not_to contain_package('hipchat') }
   end
 
   describe 'on pe' do
@@ -73,8 +74,8 @@ describe 'report_hipchat' do
         room:    'myroom'
       }
     end
-    it { should contain_package('hipchat').with_provider('pe_gem') }
-    it { should contain_file('/etc/puppetlabs/puppet/hipchat.yaml') }
+    it { is_expected.to contain_package('hipchat').with_provider('pe_gem') }
+    it { is_expected.to contain_file('/etc/puppetlabs/puppet/hipchat.yaml') }
   end
 
   describe 'on puppet 4' do
@@ -90,8 +91,8 @@ describe 'report_hipchat' do
         room:    'myroom'
       }
     end
-    it { should_not contain_package('hipchat') }
-    it { should contain_file('/etc/puppetlabs/puppet/hipchat.yaml') }
+    it { is_expected.not_to contain_package('hipchat') }
+    it { is_expected.to contain_file('/etc/puppetlabs/puppet/hipchat.yaml') }
   end
 
   describe 'with proxy' do
@@ -103,7 +104,7 @@ describe 'report_hipchat' do
         proxy:   'myproxy'
       }
     end
-    it { should contain_file('/etc/puppet/hipchat.yaml').with_content(/:hipchat_proxy: myproxy\n/) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').with_content(%r{:hipchat_proxy: myproxy\n}) }
   end
 
   describe 'with puppetboard' do
@@ -115,7 +116,7 @@ describe 'report_hipchat' do
         puppetboard: 'mypuppetboard'
       }
     end
-    it { should contain_file('/etc/puppet/hipchat.yaml').with_content(/:hipchat_puppetboard: mypuppetboard\n/) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').with_content(%r{:hipchat_puppetboard: mypuppetboard\n}) }
   end
 
   describe 'with dashboard' do
@@ -127,6 +128,6 @@ describe 'report_hipchat' do
         dashboard: 'mydashboard'
       }
     end
-    it { should contain_file('/etc/puppet/hipchat.yaml').with_content(/:hipchat_dashboard: mydashboard\n/) }
+    it { is_expected.to contain_file('/etc/puppet/hipchat.yaml').with_content(%r{:hipchat_dashboard: mydashboard\n}) }
   end
 end

@@ -20,17 +20,17 @@ A Puppet report handler for sending notifications of Puppet runs to [HipChat](ht
 * `hipchat >= 0.12.0`
 * `puppet`
 
-For Cent/RHEL 6 users running open source puppet-master 3.x, puppet utilizes the system ruby as such the latest repository provided version of ruby is 1.8.7, this means use of RVM or some other method to install a modern version of ruby will be required.
+#### Centos/RedHat 6 running puppet3.x
+Puppet utilizes the ruby located in path, as 1.8.7 is the latest ruby supplied by YUM, RVM or other means to update Ruby to 1.9.3+ is required prior to using this module.
 
+#### Obtaining Hipchat Auth Token
 For the room in which you want to receive puppet notifications, add a new BYO Integration. This will return an example url: `https://example.hipchat.com/v2/room/123456789/notification?auth_token=WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S`
         `https://example.hipchat.com` is the server (you can use on premise hipchat servers as well)
         `v2` is the api version
         `123456789` is the room
         `WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S` is the api_key
 
-## Installation
-
-### Installation utilizing puppet
+## Usage / Installation
 
 ```puppet
 class { 'report_hipchat':
@@ -71,7 +71,7 @@ class { 'report_hipchat':
 }
 ```
 
-If you need to use a proxy to reach the hipchat server:
+### Proxy
 
 ```puppet
 class { 'report_hipchat':
@@ -85,97 +85,90 @@ class { 'report_hipchat':
 }
 ```
 
-Where provider is the following:
+### Provider
 * `puppetserver_gem` used for opensource and pe puppetserver requires [puppetlabs-pe_gem](https://forge.puppet.com/puppetlabs/puppetserver_gem)
 * `pe_gem` used for PE puppet master 3.x requires [puppetlabs-pe_gem](https://forge.puppet.com/puppetlabs/pe_gem)
 * `gem` used for opensource puppet-master 
 
-Lastly Enable pluginsync and reports on your master and clients in `puppet.conf`
+### Configure the report in puppet.conf
+```puppet
+# on puppet master
+ini_setting {'pluginsync-master':
+  ensure  => present,
+  path    => '/etc/puppetlabs/puppet/puppet.conf',
+  section => 'master',
+  setting => 'pluginsync',
+  value   => 'true', 
+  notify  => Service['puppetserver'],
+}
+ini_setting {'report':
+  ensure  => present,
+  path    => '/etc/puppetlabs/puppet/puppet.conf',
+  section => 'master',
+  setting => 'report',
+  value   => 'true', 
+  notify  => Service['puppetserver'],
+}       
+ini_setting {'reports':
+  ensure  => present,
+  path    => '/etc/puppetlabs/puppet/puppet.conf',
+  section => 'master',
+  setting => 'reports',
+  value   => 'hipchat',
+  notify  => Service['puppetserver'],
+} 
 
-        [master]
-        report = true
-        reports = hipchat
-        pluginsync = true
-        [agent]
-        report = true
-        pluginsync = true
+# on puppetmaster and agents
+ini_setting {'pluginsync-agent':
+  ensure  => present,
+  path    => '/etc/puppetlabs/puppet/puppet.conf',
+  section => 'agent',
+  setting => 'pluginsync',
+  value   => 'true',
+  notify  => Service['puppetserver'],
+} 
+```
 
-### Manual Installation
+Result:
+```ini
+[master]
+report = true
+reports = hipchat
+pluginsync = true
+[agent]
+report = true
+```
 
-1.  Install the `hipchat` gem on your Puppet server
-
-*NOTE FOR PE/Open Source puppetserver package 2.0.0+ USERS*:  You must install the `hipchat` gem using the
-puppetserver gem utility:
-
-        $ /opt/puppetlabs/bin/puppetserver gem install hipchat
-
-*NOTE FOR PE puppet-master USERS*: You must install the `hipchat` gem using the
-puppet-bundled gem library:
-
-        $ /opt/puppet/bin/gem install hipchat
-        
-*NOTE FOR Open Source puppet-master USERS*: You must install the `hipchat` gem using the system gem utility:
-        
-        $ sudo gem install hipchat
-
-
-2.  Install report-hipchat as a module in your Puppet master's module
-    path.
-
-3.  Update the `hipchat_server`, `hipchat_api_version`, `hipchat_api`, `hipchat_room` variables in the
-    `hipchat.yaml` file with your Hipchat connection details and copy
-    the file to `/etc/puppet/` or for PE/OpenSource puppetserver
-    `/etc/puppetlabs/puppet`.
-        
-        ---
-        :hipchat_server: 'https://test.hipchat.com'
-        :hipchat_api_version: 'v2',
-        :hipchat_api: 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S'
-        :hipchat_room: '123456789'
-        
-
-4.  Enable pluginsync and reports on your master and clients in `puppet.conf`
-
-        [master]
-        report = true
-        reports = hipchat
-        pluginsync = true
-        [agent]
-        report = true
-        pluginsync = true
-
-6.  Run the Puppet client and sync the report as a plugin
-
-Usage
+Params
 -----
+```list
+api_key:        Hipchat API key String[required]
+api_version:    Hipchat API version: String[default: 'v1']
+room:           Hipchat Room String[required]
+notify_room:    Notify room: Boolean[default: false]
+notify_color:   Notification Color: String[default: 'red'] options['red', 'green', 'purple', 'random']
+statuses:       Array of statuses to notify: Array[Defailt ['failed'] ], options['failed', 'all']
+server:         Hipchat Sever String[default: 'https://api.hipchat.com']
+config_file:    Hipchat config file: String[default: "{confdir}/hipchat.yaml"]
+owner:          hipchat.conf owner: String[default: Varies based on puppet version]
+group:          hipchat.conf group: String[default: Varies based on puppet version]
 
-* An option to notify users in the room `hipchat_notify` defaults to
-  `false`.
+package_name:   Hipchat gem: String[default: 'hipchat']
+install_hc_gem: Install Hipchat Gem: Boolean[default: Varies based on puppet version]
+provider:       Package Provider to use: String[default: Varies based on puppet version]
 
-* You can also change the default notification color from yellow to red,
-  green, purple or random.
+puppetboard:    URL to puppetboard: String[optional]
+dashboard:      URL to dashboard: String[optional]
+proxy:          proxy url and port to reach hipchat: String[optional] Format: 'http://username:password@proxy_host:proxy_port'
+```
 
-* The `hipchat_statuses` should be an array of statuses to send
-  notifications for and defaults to `'failed'`. Specify `'all'` to
-  receive notifications from all Puppet runs.
+#### NOTE FOR PUPPETBOARD 1.1.2+ USERS: 
+if you are using environments other than `production`
+you will need to either configure puppetboard default environment to * or set `hipchat_server`
+to append /%2A, ex: `:hipchat_server: http://hipchat.test.local/%2A` otherwise you will receive
+a not found error for any nodes in environments other than `production`.
 
-* In order to send notifications through proxy server set
-  `hipchat_proxy` to your HTTP proxy URL using this format:
-
-    'http://username:password@proxy_host:proxy_port'
-
-* If you use [Puppetboard](https://github.com/nedap/puppetboard) set
-  `hipchat_puppetboard` to the base URL of your Puppetboard
-  installation, e.g. `'http://puppetboard.example.com'` and a link to the
-  node's latest report will be send with the message to HipChat. An
-  example file is included.
-
-  *NOTE FOR PUPPETBOARD 0.1.2+ USERS*: if you are using environments other than production
-  you will need to either configure puppetboard default environment to * or set `hipchat_server`
-  to append /%2A, ex: `:hipchat_server: http://hipchat.test.local/%2A` otherwise you will receive
-  a not found error for any nodes in environments other than `production`. Alternitively you can set
-  puppetboard default environment to `*`.
-
+#### Disabling notifcations temporarily
 * To temporarily disable HipChat notifications add a file named
   `hipchat_disabled` in the same path as `hipchat.yaml`. Removing it
   will re-enable notifications.
