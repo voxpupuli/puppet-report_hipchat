@@ -3,4 +3,4 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 2016-12-22 Release 1.0.0
 - Modulesync with latest Vox Pupuli defaults
-- First Release in the Vox Pupuli namespace; module donated by James Powis (jamtur01)
+- First Release in the Vox Pupuli namespace; module donated by James Powis and James Turnbull (jamtur01)
