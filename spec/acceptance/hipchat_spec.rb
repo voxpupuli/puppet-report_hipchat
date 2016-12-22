@@ -64,8 +64,7 @@ describe 'puppet-hipchat' do
       # run the agent, this will cause the reporting handler generate a tmp file
       # to show it executed properly
       it 'an agent run is successful' do
-        master = only_host_with_role(hosts, 'master')
-        expect(run_agent_on(master).exit_code).to be_zero
+        expect(run_agent_on(hosts[0]).exit_code).to be_zero
       end
     end
 
