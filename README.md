@@ -16,12 +16,8 @@ A Puppet report handler for sending notifications of Puppet runs to [HipChat](ht
 
 ## Requirements
 
-* `ruby >= 1.9.3` Note: PE puppet-master 3.x and PE/opensource puppetserver bundled versions of ruby should meet required version.
 * `hipchat >= 0.12.0`
 * `puppet`
-
-#### Centos/RedHat 6 running puppet3.x
-Puppet utilizes the ruby located in path, as 1.8.7 is the latest ruby supplied by YUM, RVM or other means to update Ruby to 1.9.3+ is required prior to using this module.
 
 #### Obtaining Hipchat Auth Token
 For the room in which you want to receive puppet notifications, add a new BYO Integration. This will return an example url: `https://example.hipchat.com/v2/room/123456789/notification?auth_token=WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S`
