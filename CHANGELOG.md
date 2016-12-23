@@ -1,6 +1,9 @@
 # Change log
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2016-12-22 Release 1.0.3
+- more struggles with release
+
 ## 2016-12-22 Release 1.0.2
 - Try the release one more time? Maybe?
 
