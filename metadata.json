@@ -6,7 +6,7 @@
   "summary": "A Puppet report handler for sending notifications of failed runs to HipChat",
   "source": "https://github.com/voxpupuli/puppet-report_hipchat",
   "project_page": "https://github.com/voxpupuli/puppet-report_hipchat",
-  "issues_url": "https://github.com/voxpupuli/puppet-hipchat/issues",
+  "issues_url": "https://github.com/voxpupuli/puppet-report_hipchat/issues",
   "tags": [
     "hipchat",
     "notifications",
