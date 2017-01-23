@@ -10,9 +10,6 @@ spec/fixtures/modules/
 coverage/
 log/
 .idea/
-.dependencies/
-.librarian/
-Puppetfile.lock
 *.iml
 .*.sw?
 .yardoc/

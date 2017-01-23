@@ -1,6 +1,12 @@
 # Change log
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2017-02-11 Release 1.1.0
+
+This is the last release with Puppet3 support!
+- Add deprication warning about Puppet3
+- Modulesync
+
 ## 2016-12-28 Release 1.0.5
 - Fixing Metadata and Readme URL's
 - Improved Acceptance Tests when proxy is true
