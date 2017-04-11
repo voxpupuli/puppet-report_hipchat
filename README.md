@@ -17,7 +17,10 @@ A Puppet report handler for sending notifications of Puppet runs to [HipChat](ht
 ## Requirements
 
 * `hipchat >= 0.12.0`
-* `puppet`
+* `puppet >= 4.6.1`
+
+Note: Puppet 3.x should generally work with the plugin, but requires the parameter `install_hc_gem => false`, and then
+you will need to take care to install the hipchat gem appropriately.
 
 #### Obtaining Hipchat Auth Token
 For the room in which you want to receive puppet notifications, add a new BYO Integration. This will return an example url: `https://example.hipchat.com/v2/room/123456789/notification?auth_token=WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S`
