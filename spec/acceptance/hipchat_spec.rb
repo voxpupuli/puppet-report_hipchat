@@ -53,7 +53,6 @@ describe 'puppet-hipchat' do
           statuses       => ['all', 'testing'],
           install_hc_gem => true,
           provider       => 'puppetserver_gem',
-          proxy          => 'http://myproxy.com:80',
           notify         => Service['puppetserver'],
         }
         EOS
