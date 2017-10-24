@@ -8,7 +8,7 @@ rescue LoadError
 end
 
 if Gem::Version.new(Puppet.version) < Gem::Version.new('4.0.0')
-  Puppet.warning 'Puppet 3.x support is depricated, upgrade to puppet 4'
+  Puppet.error 'Puppet 3.x is not supported in this version of the hipchat report processor'
 end
 
 Puppet::Reports.register_report(:hipchat) do
