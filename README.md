@@ -1,3 +1,5 @@
+**Depecated** This module is [archived](https://github.com/voxpupuli/puppet-report_hipchat/issues/44) since Hipchat is unusupported now.
+
 # Puppet Hipchat
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/puppet/report_hipchat.svg)](https://forge.puppetlabs.com/puppet/report_hipchat)
